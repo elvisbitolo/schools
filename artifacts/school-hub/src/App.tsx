@@ -11,6 +11,7 @@ import Dashboard from "@/pages/dashboard";
 import Chat from "@/pages/chat";
 import Questions from "@/pages/questions";
 import Profile from "@/pages/profile";
+import Collaborate from "@/pages/collaborate";
 
 import { PublicLayout } from "@/components/layout/PublicLayout";
 import { ProtectedLayout } from "@/components/layout/ProtectedLayout";
@@ -19,7 +20,7 @@ import { BookOpen } from "lucide-react";
 
 function ProtectedRoute({ children }: { children: ReactNode }) {
   const { currentUser, loading } = useAuth();
-  
+
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-background">
@@ -29,7 +30,7 @@ function ProtectedRoute({ children }: { children: ReactNode }) {
       </div>
     );
   }
-  
+
   if (!currentUser) {
     return <Redirect to="/signin" />;
   }
@@ -39,7 +40,7 @@ function ProtectedRoute({ children }: { children: ReactNode }) {
 
 function PublicRoute({ children }: { children: ReactNode }) {
   const { currentUser, loading } = useAuth();
-  
+
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-background">
@@ -69,7 +70,7 @@ function Router() {
       <Route path="/signup">
         <PublicRoute><SignUp /></PublicRoute>
       </Route>
-      
+
       <Route path="/dashboard">
         <ProtectedRoute><Dashboard /></ProtectedRoute>
       </Route>
@@ -78,6 +79,9 @@ function Router() {
       </Route>
       <Route path="/questions">
         <ProtectedRoute><Questions /></ProtectedRoute>
+      </Route>
+      <Route path="/collaborate">
+        <ProtectedRoute><Collaborate /></ProtectedRoute>
       </Route>
       <Route path="/profile">
         <ProtectedRoute><Profile /></ProtectedRoute>
