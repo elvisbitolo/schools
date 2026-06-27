@@ -1,0 +1,20 @@
+uploads = []
+generated = []
+
+[[outputs]]
+id = "YvR0QTbwE88NNVrT-Ry96"
+uri = "file://artifacts/school-hub/public/images/hero.jpg"
+type = "image"
+title = "modern school campus building exterior with students"
+
+[[outputs]]
+id = "WgyIYTjIYSoQ7V0Rsk5NO"
+uri = "file://artifacts/school-hub/public/images/feature-1.jpg"
+type = "image"
+title = "teacher helping students in modern classroom"
+
+[[outputs]]
+id = "ruospl7_xH2bxggVuiJZN"
+uri = "file://artifacts/school-hub/public/images/feature-2.jpg"
+type = "image"
+title = "students studying together in modern school library"
