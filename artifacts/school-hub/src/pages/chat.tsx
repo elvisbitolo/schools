@@ -34,7 +34,7 @@ export default function Chat() {
   // Mobile: show sidebar or chat
   const [mobileView, setMobileView] = useState<"sidebar" | "chat">("sidebar");
 
-  const allowedRoles = ["Principal", "Teacher", "Librarian", "Non-Teaching Staff"];
+  const allowedRoles = ["Principal", "Teacher", "Librarian", "Non-Teaching Staff", "Parent"];
   const canAccess = userProfile && allowedRoles.includes(userProfile.role);
 
   useEffect(() => {

@@ -12,6 +12,10 @@ import Chat from "@/pages/chat";
 import Questions from "@/pages/questions";
 import Profile from "@/pages/profile";
 import Collaborate from "@/pages/collaborate";
+import Announcements from "@/pages/announcements";
+import Classes from "@/pages/classes";
+import Attendance from "@/pages/attendance";
+import Pricing from "@/pages/pricing";
 
 import { PublicLayout } from "@/components/layout/PublicLayout";
 import { ProtectedLayout } from "@/components/layout/ProtectedLayout";
@@ -20,72 +24,48 @@ import { BookOpen } from "lucide-react";
 
 function ProtectedRoute({ children }: { children: ReactNode }) {
   const { currentUser, loading } = useAuth();
-
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-background">
-        <div className="animate-spin text-primary">
-          <BookOpen className="w-8 h-8" />
-        </div>
+        <div className="animate-spin text-primary"><BookOpen className="w-8 h-8" /></div>
       </div>
     );
   }
-
-  if (!currentUser) {
-    return <Redirect to="/signin" />;
-  }
-
+  if (!currentUser) return <Redirect to="/signin" />;
   return <ProtectedLayout>{children}</ProtectedLayout>;
 }
 
 function PublicRoute({ children }: { children: ReactNode }) {
   const { currentUser, loading } = useAuth();
-
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-background">
-        <div className="animate-spin text-primary">
-          <BookOpen className="w-8 h-8" />
-        </div>
+        <div className="animate-spin text-primary"><BookOpen className="w-8 h-8" /></div>
       </div>
     );
   }
-
-  if (currentUser) {
-    return <Redirect to="/dashboard" />;
-  }
-
+  if (currentUser) return <Redirect to="/dashboard" />;
   return <PublicLayout>{children}</PublicLayout>;
 }
 
 function Router() {
   return (
     <Switch>
-      <Route path="/">
-        <PublicRoute><Home /></PublicRoute>
-      </Route>
-      <Route path="/signin">
-        <PublicRoute><SignIn /></PublicRoute>
-      </Route>
-      <Route path="/signup">
-        <PublicRoute><SignUp /></PublicRoute>
+      <Route path="/"><PublicRoute><Home /></PublicRoute></Route>
+      <Route path="/signin"><PublicRoute><SignIn /></PublicRoute></Route>
+      <Route path="/signup"><PublicRoute><SignUp /></PublicRoute></Route>
+      <Route path="/pricing">
+        <ProtectedRoute><Pricing /></ProtectedRoute>
       </Route>
 
-      <Route path="/dashboard">
-        <ProtectedRoute><Dashboard /></ProtectedRoute>
-      </Route>
-      <Route path="/chat">
-        <ProtectedRoute><Chat /></ProtectedRoute>
-      </Route>
-      <Route path="/questions">
-        <ProtectedRoute><Questions /></ProtectedRoute>
-      </Route>
-      <Route path="/collaborate">
-        <ProtectedRoute><Collaborate /></ProtectedRoute>
-      </Route>
-      <Route path="/profile">
-        <ProtectedRoute><Profile /></ProtectedRoute>
-      </Route>
+      <Route path="/dashboard"><ProtectedRoute><Dashboard /></ProtectedRoute></Route>
+      <Route path="/announcements"><ProtectedRoute><Announcements /></ProtectedRoute></Route>
+      <Route path="/chat"><ProtectedRoute><Chat /></ProtectedRoute></Route>
+      <Route path="/questions"><ProtectedRoute><Questions /></ProtectedRoute></Route>
+      <Route path="/collaborate"><ProtectedRoute><Collaborate /></ProtectedRoute></Route>
+      <Route path="/classes"><ProtectedRoute><Classes /></ProtectedRoute></Route>
+      <Route path="/attendance"><ProtectedRoute><Attendance /></ProtectedRoute></Route>
+      <Route path="/profile"><ProtectedRoute><Profile /></ProtectedRoute></Route>
 
       <Route component={NotFound} />
     </Switch>
